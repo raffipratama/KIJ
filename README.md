@@ -211,7 +211,7 @@ ECB (Electronic codebook) merupakan salah satu mode operasi block cipher yang pa
 [](snapcode/2_1.png)
 
 3. Pada tahap enkripsi, nilai plaintext dilakukan konversi ke matrix untuk membentuk four-word round key (16 byte) menggunakan function text2matrix. Plain text yang terlah dikonversi selanjutnya dilakukan operasi __add_round_key. Lalu dilakukan operasi iterasi __round_encrypt yang terdiri dari __sub_bytes, __shift_rows, __mix_columns, __add_round_key. Begitu pula bila akan melakukan dekripsi, yang pada iterasi __round_decrypt nya terdiri dari __add_round_key, __inv_mix_columns, __inv_shift_rows, dan __inv_sub_bytes yang memiliki operasi yang sama namun terbalik.
-[](snapcode/3_1.png)
+[]("snapcode/3_1.png")
 [](snapcode/3_2.png)
 [](snapcode/3_3.png)
 
