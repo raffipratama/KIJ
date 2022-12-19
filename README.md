@@ -19,7 +19,7 @@ Dimulai pada main dimana disini diinputkan plaintext, menyesuaikan plaintext den
 #include <stdlib.h>
 #include <string.h>
  
-char encryption(char []);
+char encryption(char ![]);
 void play_fair();
 char key[100], play[5][5], ct[255], msg[255], plain_text[255], c_text[255];
 int main(){
@@ -69,7 +69,7 @@ int main(){
 
 Berikutnya terdapat fungsi encryption untuk mengenkripsikan plaintext. Pada fungsi ini pertama direquestkan kunci matriks pada fungsi play_fair dan mengenkripsikan text. 
 ```c
-char encryption(char pt[]){
+char encryption(char pt![]){
    int i, j, k, l, r1,r2, c1, c2, p, q;
  
    //membuat matriks key
@@ -202,35 +202,35 @@ ECB (Electronic codebook) merupakan salah satu mode operasi block cipher yang pa
 
 ## 2. Code dan Comment
 1. Code diawali dengan validasi nilai key yang harus memiliki panjang bytes senilai 16, 24, atau 32. Bila tidak valid, maka program berhenti. Bila valid, maka akan dilanjutkan ke tahap key expansion.
-[](snapcode/code.png)
-[](snapcode/1.png)
+![](snapcode/code.png)
+![](snapcode/1.png)
 	
 
 2. Tahap ekspansi key diawali dengan konversi nilai key ke dalam bentuk matrix untuk membentuk four-word round key (16 byte) menggunakan function text2matrix. Selanjutnya dihasilkan linear array lainnya sejumlah 4 * jumlah ronde sesuai pada pemetaan dict round_number. Word pada index kelipatan 4, dihasilkan linear array dari operasi xor nilai atasnya (index-4), nilai sbox, dan nilai rcon. Sedangkan pada index lainnya dihasilkan dari operasi xor nilai atasnya dan nilai sebelumnya (index-1). Terus dilakukan hingga didapatkan nilai round key dengan panjang 4 + (4 * round_number)
-[](snapcode/2.png)
-[](snapcode/2_1.png)
+![](snapcode/2.png)
+![](snapcode/2_1.png)
 
 3. Pada tahap enkripsi, nilai plaintext dilakukan konversi ke matrix untuk membentuk four-word round key (16 byte) menggunakan function text2matrix. Plain text yang terlah dikonversi selanjutnya dilakukan operasi __add_round_key. Lalu dilakukan operasi iterasi __round_encrypt yang terdiri dari __sub_bytes, __shift_rows, __mix_columns, __add_round_key. Begitu pula bila akan melakukan dekripsi, yang pada iterasi __round_decrypt nya terdiri dari __add_round_key, __inv_mix_columns, __inv_shift_rows, dan __inv_sub_bytes yang memiliki operasi yang sama namun terbalik.
-[]("snapcode/3_1.png")
-[](snapcode/3_2.png)
-[](snapcode/3_3.png)
+![](snapcode/3_1.png)
+![](snapcode/3_2.png)
+![](snapcode/3_3.png)
 
 
 4. Pada tahap round_encrypt, dilakukan perulangan sebanyak 10/12/14 kali bergantung pada ukuran dari key untuk proses transformasi sub_bytes, shift_rows, add_round_key, dan mix_columns
-[](snapcode/4_1.png)
-[](snapcode/4_2.png)
+![](snapcode/4_1.png)
+![](snapcode/4_2.png)
 
 5. Pada tahap sub_bytes, dilakukan subtitusi pada setiap bytes dengan nilai pada S-box pada baris x dan kolom y yang sama
-[](snapcode/4_3.png)
+![](snapcode/4_3.png)
 
 6. Pada tahap shift_rows, dilakukan pergeseran posisi bit menjadi ke kirinya, untuk bit paling kiri digeser ke posisi paling kanan
-[](snapcode/4_4.png)
+![](snapcode/4_4.png)
 
 7. Pada tahap add_round_key, dilakukan proses pengoperasian bitwise XOR pada round key dengan plaintext
-[](snapcode/4_5.png)
+![](snapcode/4_5.png)
 
 8. Pada tahap mix_columns dilakukan tranformasi untuk mengubah nilai pada tiap matriks dengan operasi XOR pada nilai dirinya dan pada nilai indeks kanannya (index+1)%4. Formula mix_columns adalah dengan menggunakan metode xtime. Xtime adalah fungsi yang melakukan shift left lalu melakukan operasi XOR dengan nilai 27 dan selanjutnya dioperasikan AND dengan nilai 255. Pada operasi xtime dilakukan apabila nilai plaintext memiliki panjang 16 bytes, jika tidak maka nilai plaintext akan di shift left satu bit.
-[](snapcode/4_6.png)
+![](snapcode/4_6.png)
 
 
 
